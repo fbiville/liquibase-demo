@@ -3,7 +3,7 @@
 ## Context
 
 These are the sources used in my short demo from my quickie "(R)évolutionnez vos bases de données" in Devoxx FR, April 20th 2012.
-You can find the slides on [Slideshare](http://www.slideshare.net/fbiville/rvolutionnez-vos-bases-de-donnes-avec-liquibase-12643096).
+You can find the slides on [Slideshare](http://www.slideshare.net/fbiville/rvolutionnez-vos-bases-de-donnes-avec-liquibase-12635225).
 
 ## Setup
 
