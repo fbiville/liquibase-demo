@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+    <changeSet id="01_define_vote_function" author="florent.biville" runAlways="true">
+        <sql><![CDATA[DROP FUNCTION IF EXISTS vote;]]></sql>
+        <sql splitStatements="false"><![CDATA[
+CREATE FUNCTION `vote` (voterFirstName VARCHAR(255),
+                        voterLastName VARCHAR(255),
+                        candidateFirstName VARCHAR(255),
+                        candidateLastName VARCHAR(255)) RETURNS INT
+BEGIN
+    DECLARE candidateId bigint(20);
+    DECLARE voterId bigint(20) DEFAULT NULL;
+    SELECT id INTO candidateId FROM candidate WHERE first_name = candidateFirstName AND last_name = candidateLastName;
+
+    IF candidateId IS NOT NULL THEN
+        INSERT INTO voter (first_name, last_name, chosen_candidate) VALUES (voterFirstName, voterLastName, candidateId);
+        SET voterId = LAST_INSERT_ID();
+    END IF;
+
+    RETURN voterId;
+END
+]]></sql>
+    </changeSet>
+</databaseChangeLog>

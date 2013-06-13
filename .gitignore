@@ -1,4 +1,6 @@
 target
-current.properties
+my.properties
 .classpath
 .project
+*.iml
+.idea

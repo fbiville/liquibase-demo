@@ -9,8 +9,7 @@ CREATE TABLE `candidate` (
   `last_name` varchar(255) NOT NULL,
   `party_name` varchar(100) NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `party` (`party_name`),
-  UNIQUE KEY `oneCandidatePerParty` (`first_name`, `last_name`, `party_name`)
+  UNIQUE KEY `firstNameLastNameUnicity` (`first_name`, `last_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -18,17 +17,17 @@ CREATE TABLE `candidate` (
 --
 
 INSERT INTO `candidate` VALUES (1,'Nicolas', 'Sarkozy', 'Union pour un Mouvement Populaire');
-INSERT INTO `candidate` VALUES (2,'Ségolène', 'Royal', 'Parti Socialiste');
-INSERT INTO `candidate` VALUES (3,'François', 'Bayrou', 'Union pour la Démocratie Française');
+INSERT INTO `candidate` VALUES (2,'SÃ©golÃ¨ne', 'Royal', 'Parti Socialiste');
+INSERT INTO `candidate` VALUES (3,'FranÃ§ois', 'Bayrou', 'Union pour la DÃ©mocratie FranÃ§aise');
 INSERT INTO `candidate` VALUES (4,'Jean-Marie', 'Le Pen', 'Front National');
-INSERT INTO `candidate` VALUES (5,'Olivier', 'Besancenot', 'Ligue Communiste Révolutionnaire');
+INSERT INTO `candidate` VALUES (5,'Olivier', 'Besancenot', 'Ligue Communiste RÃ©volutionnaire');
 INSERT INTO `candidate` VALUES (6,'Philippe', 'de Villiers', 'Mouvement Pour la France');
-INSERT INTO `candidate` VALUES (7,'Marie-Georges', 'Buffet', 'Parti Communiste Français');
+INSERT INTO `candidate` VALUES (7,'Marie-Georges', 'Buffet', 'Parti Communiste FranÃ§ais');
 INSERT INTO `candidate` VALUES (8,'Dominique', 'Voynet', 'Les Verts');
-INSERT INTO `candidate` VALUES (9,'Arlette', 'Laguillier', 'Lutte Ouvrière');
-INSERT INTO `candidate` VALUES (10,'José', 'Bové', NULL);
-INSERT INTO `candidate` VALUES (11,'Frédéric', 'Nihous', 'Chasse, Pêche, Nature et Traditions');
-INSERT INTO `candidate` VALUES (12,'Gérard', 'Schivardi', 'Comité National pour la Reconquête des Services Publics');
+INSERT INTO `candidate` VALUES (9,'Arlette', 'Laguillier', 'Lutte OuvriÃ¨re');
+INSERT INTO `candidate` VALUES (10,'JosÃ©', 'BovÃ©', NULL);
+INSERT INTO `candidate` VALUES (11,'FrÃ©dÃ©ric', 'Nihous', 'Chasse, PÃªche, Nature et Traditions');
+INSERT INTO `candidate` VALUES (12,'GÃ©rard', 'Schivardi', 'ComitÃ© National pour la ReconquÃªte des Services Publics');
 
 
 --
@@ -47,7 +46,3 @@ CREATE TABLE `voter` (
   FOREIGN KEY (chosen_candidate) REFERENCES `candidate` (id) ON DELETE CASCADE,
   UNIQUE KEY `one_candidate_per_voter` (`first_name`, `last_name`, `chosen_candidate`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `voter`
---

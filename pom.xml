@@ -1,41 +1,81 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>net.florentbiville</groupId>
-	<artifactId>elisez-db-migrations</artifactId>
-	<packaging>jar</packaging>
-	<version>1.0-SNAPSHOT</version>
-	<name>elisez-db-migrations</name>
-	<dependencies>
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.18</version>
-		</dependency>
-	</dependencies>
-	<properties>
-		<env.file>environments/current.properties</env.file>
-	</properties>
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.liquibase</groupId>
-				<artifactId>liquibase-maven-plugin</artifactId>
-				<version>2.0.3</version>
-				<configuration>
-					<promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
-					<changeLogFile>src/main/resources/net/florentbiville/master.xml</changeLogFile>
-					<propertyFile>${env.file}</propertyFile>
-				</configuration>
-				<executions>
-					<execution>
-					<phase>process-resources</phase>
-					<goals>
-						<goal>updateSQL</goal>
-						<goal>update</goal>
-					</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.github.fbiville.liquibase</groupId>
+    <artifactId>demo</artifactId>
+    <packaging>jar</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <name>elisez-db-migrations</name>
+
+    <repositories>
+        <!-- f*cking wildcard -->
+        <repository>
+            <id>my-local-repo</id>
+            <url>file://${basedir}/y_u_no_use_maven_central</url>
+        </repository>
+    </repositories>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <env.file>environments/my.properties</env.file>
+        <liquibase.master.location>src/main/resources/com/github/fbiville/liquibase/master.xml</liquibase.master.location>
+    </properties>
+
+    <dependencies>
+        <!-- drivers -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.25</version>
+        </dependency>
+        <!-- tests -->
+        <dependency>
+            <groupId>wildcard</groupId>
+            <artifactId>wildcard</artifactId>
+            <version>1.03</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>1.2.0</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <defaultGoal>clean verify package</defaultGoal>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.15</version>
+            </plugin>
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>2.0.5</version>
+                <configuration>
+                    <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
+                    <changeLogFile>${liquibase.master.location}</changeLogFile>
+                    <propertyFile>${env.file}</propertyFile>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>updateSQL</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

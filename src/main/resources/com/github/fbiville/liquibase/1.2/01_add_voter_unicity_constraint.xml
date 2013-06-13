@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+    <changeSet id="fix_voter_unicity_constraint" author="florent.biville">
+        <delete tableName="voter" />
+        <dropUniqueConstraint tableName="voter" constraintName="one_candidate_per_voter" />
+        <addUniqueConstraint tableName="voter" constraintName="one_vote_per_voter" columnNames="first_name,last_name" />
+    </changeSet>
+</databaseChangeLog>

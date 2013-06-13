@@ -4,7 +4,6 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-    <include file="1.0/master-1.0.xml" relativeToChangelogFile="true" />
-    <include file="1.1/master-1.1.xml" relativeToChangelogFile="true" />
-    <include file="1.2/master-1.2.xml" relativeToChangelogFile="true" />
+
+    <include file="01_add_voter_unicity_constraint.xml" relativeToChangelogFile="true" />
 </databaseChangeLog>
