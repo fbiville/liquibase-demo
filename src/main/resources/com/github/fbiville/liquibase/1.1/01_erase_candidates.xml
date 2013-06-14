@@ -6,6 +6,7 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 
     <changeSet id="01_erase_candidates" author="florent.biville">
+        <delete tableName="voter" />
         <delete tableName="candidate" />
     </changeSet>
 </databaseChangeLog>
