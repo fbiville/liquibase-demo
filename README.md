@@ -24,3 +24,6 @@ Run `mvn verify liquibase:update`.
 
 ## Troubleshooting
 Ping me on Twitter (@fbiville) if you face any problems!
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/fbiville/liquibase-demo/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
